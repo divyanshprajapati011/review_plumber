@@ -138,7 +138,7 @@ import streamlit as st
 import random
 import streamlit.components.v1 as components
 
-st.set_page_config(page_title="Tawa Treats Review Picker", page_icon="⭐", layout="centered")
+st.set_page_config(page_title="Rambo Plumbing Service Balaghat Review Picker", page_icon="⭐", layout="centered")
 
 # ===== Title + Styles =====
 st.markdown("""
@@ -192,7 +192,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # ===== Google Review URL =====
-GOOGLE_REVIEW_URL = "https://g.page/r/CVo-B6igiA3yEAE/review"
+GOOGLE_REVIEW_URL = "https://g.page/r/Cbm18z9UQ58-EAE/review"
 
 # ===== Load Reviews =====
 try:
@@ -237,6 +237,7 @@ if st.session_state.selected_review:
     """, height=100)
 else:
     st.info("👆 First generate a review to continue.")
+
 
 
 
