@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Confort physiotherapy center Bhopal</title>
+<style>
+body {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background: url('background.jpg') no-repeat center center fixed;
+  background-size: cover;
+  color: #333;
+  padding: 40px 20px;
+}
+.header { text-align: center; margin-bottom: 20px; }
+.header img { width: 80px; display: block; margin: 0 auto 10px; }
+.header h1 { font-size: 26px; margin: 0; }
+.overlay {
+  background-color: rgba(255, 255, 255, 0.85);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+h2 { font-size: 22px; margin-bottom: 15px; }
+p { font-size: 18px; line-height: 1.5; }
+button {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 18px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #0b5fff;
+  color: white;
+  transition: background-color 0.2s;
+}
+button:hover { background-color: #0846b7; }
+.hidden { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <img src="logo.png" alt="Rambo Plumbing Logo">
+  <h1>⭐ Rambo Plumbing Service Balaghat ⭐ </h1>
+</div>
+
+<div id="page1" class="overlay">
+  <h2>About Our Company</h2>
+  <p>
+    At <strong> Rambo Plumbing Service Balaghat </strong>,Comfort Physiotherapy Centre, Bhopal is a trusted name in advanced physiotherapy and rehabilitation care. With a strong commitment to patient recovery, we specialize in treating a wide range of conditions — including arthritis, back and neck pain, sports injuries, post-surgery rehabilitation, joint pain, muscle strains, and mobility issues.
+
+Our centre is equipped with modern physiotherapy equipment and operated by a team of highly skilled and compassionate physiotherapists. We believe in personalized care plans, hands-on techniques, and evidence-based treatments that deliver lasting results.
+
+At Comfort Physiotherapy, we aim not just to relieve pain, but to restore confidence, independence, and quality of life. Our clean, friendly, and supportive environment ensures that every patient feels comfortable, heard, and cared for throughout their recovery journey.
+  </p>
+</div>
+<button id="nextBtn1">➡️ Next</button>
+
+<div id="page2" class="overlay hidden">
+  <h2>Customer Review</h2>
+  <p id="reviewText">Loading review...</p>
+</div>
+<button id="nextBtn2" class="hidden">➡️ Next</button>
+
+<script>
+const page1 = document.getElementById('page1');
+const page2 = document.getElementById('page2');
+const reviewText = document.getElementById('reviewText');
+const nextBtn1 = document.getElementById('nextBtn1');
+const nextBtn2 = document.getElementById('nextBtn2');
+let review = "";
+
+// --- Define reviews directly in JS ---
+const reviews = [
+  "Rambo Plumbing fixed our leaking pipes quickly and efficiently. Highly recommend their service!",
+  "Very professional and punctual team. They diagnosed the issue and resolved it on the same day.",
+  "Their pricing is fair and transparent. No hidden charges or unnecessary repairs.",
+  "I’m impressed by their expertise and the quality of the plumbing materials they used.",
+  "Rambo Plumbing installed our new bathroom fittings perfectly – neat and tidy work.",
+  "They responded immediately to our emergency call and fixed the problem without delay.",
+  "The staff was courteous and explained the repairs clearly before starting the work.",
+  "Excellent service with a friendly attitude. I will definitely call them again for future plumbing needs.",
+  "They tested everything thoroughly before leaving, ensuring no leaks or issues remained.",
+  "Affordable, reliable, and trustworthy plumbing service in Balaghat.",
+  "Their team replaced old pipes with high-quality materials that have lasted well so far.",
+  "I appreciate how cleanly they work – no mess left behind after the job.",
+  "They provided expert advice on preventing future plumbing issues.",
+  "Quick and efficient water heater installation by Rambo Plumbing.",
+  "Very knowledgeable technicians who know how to handle complex plumbing problems.",
+  "They showed great patience answering all our plumbing questions.",
+  "Great customer support and timely updates throughout the repair process.",
+  "Rambo Plumbing installed our kitchen sink flawlessly.",
+  "The best plumbing service in Balaghat — punctual, skilled, and friendly.",
+  "Highly recommend for any kind of plumbing emergency or routine maintenance.",
+  "Rambo Plumbing’s work quality exceeded my expectations.",
+  "Their team respects your home and belongings while working.",
+  "Transparent billing with no surprise costs at the end.",
+  "I called them for a clogged drain, and they cleared it quickly.",
+  "They replaced our old bathroom taps with modern ones beautifully.",
+  "Rambo Plumbing fixed a stubborn leak that others couldn’t find.",
+  "Their team works efficiently and completes the job on time.",
+  "Great value for money — excellent workmanship without overspending.",
+  "They installed our water filtration system perfectly.",
+  "Friendly and professional technicians who are easy to work with.",
+  "Rambo Plumbing’s emergency services are quick and reliable.",
+  "The team is well-equipped with the latest plumbing tools.",
+  "Very responsive when we needed urgent repairs late at night.",
+  "They handled our bathroom renovation plumbing with precision.",
+  "Always clean and organized during and after the job.",
+  "Great communication from start to finish of the project.",
+  "Their advice helped us avoid expensive repairs later.",
+  "Rambo Plumbing’s installation of our geyser was flawless.",
+  "Polite staff who explain the process before starting work.",
+  "We had no water pressure issues after their pipe replacement.",
+  "Their plumbing inspections are thorough and reliable.",
+  "They replaced our broken PVC pipes quickly and professionally.",
+  "Highly skilled plumbers with years of experience.",
+  "The team took care of small repairs and big installations with equal dedication.",
+  "They recommended durable materials suitable for our home’s plumbing system.",
+  "I trust Rambo Plumbing for all my home’s plumbing needs.",
+  "They cleaned our gutters and ensured proper drainage before monsoon.",
+  "Professional, honest, and skilled – a rare combination!",
+  "The repair work was long-lasting, no issues so far.",
+  "They gave us a detailed estimate before starting work.",
+  "Rambo Plumbing’s response time is impressive.",
+  "They replaced our leaking shower head without delay.",
+  "Skilled team who managed to fix a complex pipe leak flawlessly.",
+  "Very polite and respectful of our home’s cleanliness.",
+  "Their water pump installation service is excellent.",
+  "They worked around our schedule with minimal disruption.",
+  "Quality of workmanship is top-notch and reliable.",
+  "Their team is always on time and ready to work.",
+  "Rambo Plumbing saved us a lot by fixing old pipe corrosion early.",
+  "They upgraded our kitchen plumbing system efficiently.",
+  "Excellent service during the recent plumbing emergency we faced.",
+  "They made sure all plumbing fixtures were functioning perfectly before leaving.",
+  "The team patiently explained maintenance tips for our plumbing system.",
+  "Rambo Plumbing’s work brought peace of mind about water leaks.",
+  "Friendly staff who respect customer time and home environment.",
+  "They replaced our water tank fittings with durable parts.",
+  "Their prompt service helped us avoid major water damage.",
+  "I’m very happy with their drainage repair service.",
+  "Honest plumbers who don’t try to upsell unnecessary work.",
+  "Their work has improved our water flow and pressure significantly.",
+  "We relied on Rambo Plumbing for our entire bathroom renovation, and they did a fantastic job.",
+  "They responded to our call within hours and fixed the emergency leak.",
+  "The team’s skill and efficiency saved us a lot of money.",
+  "Rambo Plumbing offers excellent post-service support and maintenance advice.",
+  "The plumbers were respectful and left the site clean after completion.",
+  "They used the best tools and equipment for our plumbing installation.",
+  "The water leakage in our kitchen was fixed permanently.",
+  "We recommend Rambo Plumbing to anyone needing reliable plumbing services.",
+  "The team is very experienced and handled complex piping systems expertly.",
+  "Their cost estimates are reasonable and transparent.",
+  "Rambo Plumbing’s team worked hard to meet our tight deadline.",
+  "They replaced the water meter and made sure everything was accurate and functional.",
+  "The pipe insulation they installed helped reduce water heating costs.",
+  "Their technicians were punctual and worked with great attention to detail.",
+  "Rambo Plumbing’s repair work has held up well over several months.",
+  "They helped us select the best faucets and fixtures for our home.",
+  "The quality of their plumbing materials is excellent.",
+  "Very happy with their friendly and professional approach.",
+  "They cleaned and unclogged our main drain quickly and thoroughly.",
+  "We appreciate their honesty and reliable service.",
+  "Rambo Plumbing is our go-to service for any plumbing issues.",
+  "The team is highly trained and experienced in all types of plumbing repairs.",
+  "They ensured zero leaks after completing the pipe replacement.",
+  "Their installation of our sump pump was seamless.",
+  "The plumbing work was completed within the promised time frame.",
+  "They gave us useful tips to maintain our plumbing system.",
+  "Rambo Plumbing replaced our faulty valves with quality replacements.",
+  "Their team was careful to avoid damaging walls and flooring during work.",
+  "The service was prompt and the results were excellent.",
+  "We highly recommend Rambo Plumbing Service Balaghat for their professionalism.",
+  "Rambo Plumbing expertly installed our new water heater – great workmanship!",
+  "Their team was quick to identify and fix a hidden pipe leak in our home.",
+  "Very satisfied with their drain cleaning service – water flows smoothly now.",
+  "The plumbers were friendly, professional, and respectful of our property.",
+  "They provided excellent advice on maintaining our plumbing system for longevity.",
+  "The team arrived on time and completed the repairs ahead of schedule.",
+  "Rambo Plumbing replaced our old faucet with a modern, efficient model.",
+  "Their transparent pricing and quality service make them trustworthy.",
+  "We appreciate their quick response during our plumbing emergency at night.",
+  "The plumbing work for our kitchen renovation was flawless and timely.",
+  "They handled the installation of our bathroom fittings with precision and care.",
+  "Very reliable and thorough – no leaks after their comprehensive inspection.",
+  "The team communicated clearly and kept us informed throughout the project.",
+  "Rambo Plumbing’s service exceeded our expectations in quality and speed.",
+  "The crew cleaned up meticulously after finishing the job – very professional.",
+  "They provided durable solutions for our recurring water pressure issues.",
+  "We trust them for all plumbing repairs and installations at our home.",
+  "Excellent workmanship with attention to every small detail.",
+  "Their emergency plumbing services are prompt and efficient.",
+  "The new pipes they installed have greatly improved water flow in our house.",
+  "Rambo Plumbing offers expert advice on upgrading old plumbing systems.",
+  "Their team replaced a broken valve quickly, preventing further damage.",
+  "We are very happy with the neat and clean work done during our bathroom renovation.",
+  "They used high-quality materials that ensure long-lasting plumbing repairs.",
+  "The plumbers showed great patience explaining the repairs and maintenance tips.",
+  "Rambo Plumbing’s customer service is friendly and helpful.",
+  "They installed our garden irrigation system perfectly.",
+  "The team respects your time and completes work efficiently without cutting corners.",
+  "We appreciate their honesty and refusal to recommend unnecessary repairs.",
+  "Their work quality and reliability make them the best plumbing service in Balaghat.",
+  "Rambo Plumbing’s expertise helped us avoid costly future repairs.",
+  "Their team is well-trained, skilled, and very professional.",
+  "They completed the project on schedule without compromising on quality.",
+  "The new plumbing setup has significantly reduced our water wastage.",
+  "We recommend Rambo Plumbing for their friendly and trustworthy service.",
+  "Their quick response saved us from a major water leak issue.",
+  "The plumbers took care to avoid any damage to walls or flooring.",
+  "We are very satisfied with the smooth operation of our new plumbing fixtures.",
+  "They handled a complex piping issue with great expertise.",
+  "The team’s thorough testing ensured everything was leak-free before completion.",
+  "Rambo Plumbing’s pricing is competitive without compromising service quality.",
+  "The plumbers are polite, punctual, and professional.",
+  "They offered helpful tips to maintain our water heater and plumbing system.",
+  "Our clogged sink was cleared quickly and efficiently.",
+  "They upgraded our bathroom plumbing with modern, durable fixtures.",
+  "Rambo Plumbing’s work is reliable and built to last.",
+  "Their team worked diligently to meet our tight renovation deadlines.",
+  "The customer support team is always available to answer queries.",
+  "We appreciate their transparent and fair billing practices.",
+  "Thanks to Rambo Plumbing, our plumbing issues are now a thing of the past!"
+];
+
+
+nextBtn1.addEventListener('click', () => {
+  nextBtn1.style.display = "none";
+  page1.classList.add('hidden');
+  page2.classList.remove('hidden');
+  nextBtn2.classList.remove('hidden');
+  loadReview();
+});
+
+nextBtn2.addEventListener('click', copyAndRedirect);
+
+function loadReview() {
+  if(reviews.length === 0){
+    reviewText.textContent = "No reviews available!";
+    return;
+  }
+  const randomIndex = Math.floor(Math.random() * reviews.length);
+  review = reviews[randomIndex];
+  reviewText.textContent = review;
+}
+
+function copyAndRedirect() {
+  if(!review){
+    alert("Review not loaded yet!");
+    return;
+  }
+  navigator.clipboard.writeText(review).then(() => {
+    window.open("https://g.page/r/Cbm18z9UQ58-EAE/review", "_blank");
+  }).catch(err => {
+    alert("Copy failed. Redirecting anyway...");
+    window.open("https://g.page/r/Cbm18z9UQ58-EAE/review", "_blank");
+  });
+}
+</script>
+
+</body>
+</html>
